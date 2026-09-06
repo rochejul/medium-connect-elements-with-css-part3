@@ -1,0 +1,77 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  min-width: 0;
+  text-box: trim-both cap alphabetic;
+}
+
+:root {
+  color-scheme: light dark;
+  interpolate-size: allow-keywords;
+}
+
+html {
+  text-size-adjust: 100%;
+}
+
+body {
+  --webkit-font-smoothing: antialiased;
+}
+
+:heading,
+:is(h1, h2, h3, h4, h5, h6) {
+  text-wrap: balance;
+}
+
+p,
+:heading,
+:is(h1, h2, h3, h4, h5, h6) {
+  overflow-wrap: break-word;
+}
+
+input,
+textarea,
+select {
+  field-sizing: content;
+}
+
+input,
+textarea,
+select,
+button {
+  font: inherit;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+/* Create a root stacking context */
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* Define navigation effect */
+@view-transition {
+  navigation: auto;
+}
