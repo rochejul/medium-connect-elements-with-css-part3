@@ -10,5 +10,19 @@
     <script type="module" src="./app.js"></script>
   </head>
 
-  <body></body>
+  <body>
+    <body class="app">
+      <section class="app__body">
+        <article class="box box--movable box--one"></article>
+        <article class="box box--second"></article>
+
+        <!--
+        Links just be declared after boxes,
+        because the anchor positioning is based on CSS vars
+        and they are initialized when the DOM element is injected
+        -->
+        <div class="link link--box1-to-box2"></div>
+      </section>
+    </body>
+  </body>
 </html>

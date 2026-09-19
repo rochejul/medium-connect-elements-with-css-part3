@@ -13,5 +13,87 @@ html {
 }
 
 body {
+  display: flex;
   font: 1em sans-serif;
+}
+
+.app {
+  flex-direction: column;
+  height: 100%;
+
+  .app__body {
+    background-color: lightskyblue;
+    border: 1px solid black;
+    flex: 1 1 auto;
+    position: relative;
+  }
+}
+
+.box {
+  box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid transparent;
+  border-radius: 1rem;
+  position: absolute;
+  height: 5rem;
+  width: 5rem;
+  z-index: 10;
+
+  &.box--one {
+    anchor-name: --box1;
+    background-color: lightgray;
+    top: 25px;
+    left: 55px;
+  }
+
+  &.box--second {
+    anchor-name: --box2;
+    background-color: lightgreen;
+    top: 185px;
+    left: 505px;
+  }
+
+  &.box--movable {
+    cursor: pointer;
+
+    &.box--move-in-progress {
+      cursor: move;
+    }
+  }
+
+  &:not(.box--movable, .box--move-in-progress) {
+    pointer-events: none;
+  }
+}
+
+.link {
+  background-repeat: no-repeat;
+  min-block-size: 2px;
+  position: absolute;
+  z-index: 9;
+
+  &.link--debug {
+    border: 1px dotted black;
+  }
+
+  &.link--box1-to-box2 {
+    /*Box 1 on left top of box 2*/
+    /**/
+    inset-block-start: anchor(--box1 center);
+    inset-inline-start: anchor(--box1 center);
+    inset-inline-end: anchor(--box2 center);
+    inset-block-end: anchor(--box2 center);
+
+    background-image:
+      linear-gradient(to bottom, black, black),
+      linear-gradient(to right, black, black),
+      linear-gradient(to bottom, black, black);
+    background-size:
+      2px,
+      50% 2px,
+      50% 2px;
+    background-position:
+      center,
+      top left,
+      bottom right;
+  }
 }
