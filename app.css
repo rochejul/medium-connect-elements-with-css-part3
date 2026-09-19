@@ -75,25 +75,24 @@ body {
     border: 1px dotted black;
   }
 
-  &.link--box1-to-box2 {
-    /*Box 1 on left top of box 2*/
-    /**/
-    inset-block-start: anchor(--box1 center);
-    inset-inline-start: anchor(--box1 center);
-    inset-inline-end: anchor(--box2 center);
-    inset-block-end: anchor(--box2 center);
+  /* -------- */
+  /* Default position */
+  inset-block-start: anchor(var(--moving-element) center);
+  inset-inline-start: anchor(var(--moving-element) center);
+  inset-inline-end: anchor(var(--static-element) center);
+  inset-block-end: anchor(var(--static-element) center);
 
-    background-image:
-      linear-gradient(to bottom, black, black),
-      linear-gradient(to right, black, black),
-      linear-gradient(to bottom, black, black);
-    background-size:
-      2px,
-      50% 2px,
-      50% 2px;
-    background-position:
-      center,
-      top left,
-      bottom right;
-  }
+  background-image:
+    linear-gradient(to bottom, black, black),
+    linear-gradient(to right, black, black),
+    linear-gradient(to bottom, black, black);
+  background-size:
+    2px,
+    50% 2px,
+    50% 2px;
+  background-position:
+    center,
+    top left,
+    bottom right;
+  /* -------- */
 }
