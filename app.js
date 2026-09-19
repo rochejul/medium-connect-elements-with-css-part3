@@ -9,15 +9,15 @@ function getBoxPosition(element) {
 
 async function setup() {
   let lastCursorPositionForBoxMovement = null;
-  let lastBox1Position = null;
+  let lastMovingBoxPosition = null;
+  let movingBoxElement;
 
   const bodyElement = document.querySelector('.app__body');
-  const box1Element = document.querySelector('.box--one');
 
   bodyElement.addEventListener('pointermove', (event) => {
     console.log('Pointer moved in %s %s', event.offsetX, event.offsetY);
 
-    if (lastBox1Position) {
+    if (lastMovingBoxPosition) {
       console.info('We compute the box position');
       const diffX = Math.round(
         event.clientX - lastCursorPositionForBoxMovement.x,
@@ -28,31 +28,41 @@ async function setup() {
 
       console.log('The box has moved from %s %s', diffX, diffY);
 
-      box1Element.style = `left: ${lastBox1Position.x + diffX}px; top: ${lastBox1Position.y + diffY}px;`;
+      movingBoxElement.style = `left: ${lastMovingBoxPosition.x + diffX}px; top: ${lastMovingBoxPosition.y + diffY}px;`;
     }
   });
 
-  box1Element.addEventListener('pointerdown', (event) => {
-    console.info(
-      'We will start to move the box from pointer position %s %s',
-      event.clientX,
-      event.clientY,
-    );
+  bodyElement.addEventListener('pointerdown', (event) => {
+    if (
+      !lastMovingBoxPosition &&
+      event.target.classList.contains('box--movable')
+    ) {
+      movingBoxElement = event.target;
 
-    lastCursorPositionForBoxMovement = {
-      x: event.clientX,
-      y: event.clientY,
-    };
+      console.info(
+        'We will start to move the box from pointer position %s %s',
+        event.clientX,
+        event.clientY,
+      );
 
-    lastBox1Position = getBoxPosition(box1Element);
-    box1Element.classList.add('box--move-in-progress');
+      lastCursorPositionForBoxMovement = {
+        x: event.clientX,
+        y: event.clientY,
+      };
+
+      lastMovingBoxPosition = getBoxPosition(movingBoxElement);
+      movingBoxElement.classList.add('box--move-in-progress');
+    }
   });
 
-  box1Element.addEventListener('pointerup', () => {
-    console.info('We stop to move the box');
-    lastCursorPositionForBoxMovement = null;
-    lastBox1Position = null;
-    box1Element.classList.remove('box--move-in-progress');
+  bodyElement.addEventListener('pointerup', () => {
+    if (lastMovingBoxPosition) {
+      console.info('We stop to move the box');
+      lastCursorPositionForBoxMovement = null;
+      lastMovingBoxPosition = null;
+      movingBoxElement.classList.remove('box--move-in-progress');
+      movingBoxElement = null;
+    }
   });
 }
 
