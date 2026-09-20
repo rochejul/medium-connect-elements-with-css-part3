@@ -52,6 +52,13 @@ body {
     left: 505px;
   }
 
+  &.box--third {
+    anchor-name: --box3;
+    background-color: lightyellow;
+    top: 45px;
+    left: 675px;
+  }
+
   &.box--movable {
     cursor: pointer;
 
